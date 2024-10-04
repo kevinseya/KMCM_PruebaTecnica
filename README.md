@@ -30,6 +30,35 @@ Las siguientes dependencias están incluidas en el proyecto:
 ### Frontend (Angular)
 El frontend está desarrollado con Angular. Asegúrate de tener la versión compatible de Node.js y Angular CLI instalados.
 
+Requisitos de Instalación
+
+    Node.js: Se recomienda usar Node.js 16.x o 18.x.
+    Angular: Para este proyecto se uso Angular 16.1.0. La versión de Angular CLI utilizada es 16.1.8.
+
+Dependencias
+
+Aquí hay un resumen de las principales dependencias y sus versiones:
+
+    Angular:
+        @angular/animations: ^16.1.0
+        @angular/common: ^16.1.0
+        @angular/compiler: ^16.1.0
+        @angular/core: ^16.1.0
+        @angular/forms: ^16.1.0
+        @angular/platform-browser: ^16.1.0
+        @angular/platform-browser-dynamic: ^16.1.0
+        @angular/router: ^16.1.0
+
+    Otros:
+        crypto-js: ^4.2.0
+        rxjs: ~7.8.0
+        zone.js: ~0.13.0
+
+    DevDependencies:
+        @angular-devkit/build-angular: ^16.1.8
+        @angular/compiler-cli: ^16.1.0
+        typescript: ~5.1.3
+        
 ## Configuración
 
 ### Backend - RAMA *kmcm_backend*
