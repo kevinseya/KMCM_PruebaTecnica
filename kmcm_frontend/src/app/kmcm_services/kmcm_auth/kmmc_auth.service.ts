@@ -5,7 +5,7 @@ import {Observable} from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class Kmmc_AuthService {
   private apiUrl = 'https://localhost:7240/kmcm_api/Kmcm_controllerAuth/login';
   constructor(private http: HttpClient) { }
   login(username: string, password: string): Observable<any> {

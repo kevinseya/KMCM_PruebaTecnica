@@ -1,0 +1,60 @@
+.navbar {
+  background-color: #4a4a4a; /* Un color de fondo más suave */
+  color: white;
+  padding: 15px 30px; /* Mayor espacio interno */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Asegura que los elementos estén centrados verticalmente */
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 30px; /* Espacio entre los elementos del menú */
+}
+
+.user-name {
+  font-size: 1.2em; /* Aumentar tamaño */
+  font-weight: 900; /* Texto en negrita extra */
+  color: #333; /* Un color más oscuro o contrastante */
+  text-shadow: 1px 1px 2px rgba(224, 215, 215, 0.2); /* Sombra sutil */
+  text-transform: uppercase; /* Texto en mayúsculas */
+}
+.nav-link {
+  color: white; /* Color de texto blanco */
+  text-decoration: none; /* Sin subrayado */
+  font-size: 1em; /* Tamaño de fuente legible */
+  transition: color 0.3s; /* Transición suave */
+}
+
+.nav-link:hover {
+  color: #e74c3c; /* Color de texto al pasar el ratón */
+}
+
+.nav-actions {
+  display: flex;
+}
+
+.btn-logout {
+  background-color: #e74c3c; /* Color de fondo rojo */
+  color: white;
+  border: none;
+  padding: 10px 20px; /* Mayor espacio interno */
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.3s; /* Transición suave */
+  font-size: 1em; /* Tamaño de fuente legible */
+}
+
+.btn-logout:hover {
+  background-color: #c0392b; /* Color más oscuro al pasar el ratón */
+  transform: translateY(-2px); /* Efecto de elevarse al pasar el ratón */
+}

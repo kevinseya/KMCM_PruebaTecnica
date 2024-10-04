@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/kmcm_auth/auth.service'; // Asegúrate de tener este servicio
+import { Kmmc_AuthService } from '../../kmcm_services/kmcm_auth/kmmc_auth.service'; // Asegúrate de tener este servicio
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  templateUrl: './kmmc_navbar.component.html',
+  styleUrls: ['./kmmc_navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class Kmmc_NavbarComponent implements OnInit {
   userName: string | null = null;
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: Kmmc_AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.userName  = localStorage.getItem('name'); // Cambia esto según tu implementación

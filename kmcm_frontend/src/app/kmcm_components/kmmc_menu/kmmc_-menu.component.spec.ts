@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PersonComponent } from './person.component';
+import { Kmmc_MenuComponent } from './kmmc_-menu.component';
 
-describe('PersonComponent', () => {
-  let component: PersonComponent;
-  let fixture: ComponentFixture<PersonComponent>;
+describe('KmmcMenuComponent', () => {
+  let component: Kmmc_MenuComponent;
+  let fixture: ComponentFixture<Kmmc_MenuComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [PersonComponent]
+      declarations: [Kmmc_MenuComponent]
     });
-    fixture = TestBed.createComponent(PersonComponent);
+    fixture = TestBed.createComponent(Kmmc_MenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

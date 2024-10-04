@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LoginComponent } from './login.component';
+import { Kmmc_LoginComponent } from './kmmc_login.component';
 
 describe('LoginComponent', () => {
-  let component: LoginComponent;
-  let fixture: ComponentFixture<LoginComponent>;
+  let component: Kmmc_LoginComponent;
+  let fixture: ComponentFixture<Kmmc_LoginComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [LoginComponent]
+      declarations: [Kmmc_LoginComponent]
     });
-    fixture = TestBed.createComponent(LoginComponent);
+    fixture = TestBed.createComponent(Kmmc_LoginComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

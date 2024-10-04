@@ -7,3 +7,12 @@ export interface Kmcm_person {
   kmcm_birthdate: string;
 }
 
+export interface Kmcm_user {
+  kmcm_id?: number | null;
+  kmcm_username: string;
+  kmcm_password: string;
+  kmcm_person_id?: number | null;
+  kmcm_person?: Kmcm_person;
+}
+
+

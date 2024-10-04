@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { Kmcm_person } from '../../kmcm_models/kmcm_person.model';
+import { Kmcm_person } from '../../kmcm_models/kmcm_models';
 @Injectable({
   providedIn: 'root'
 })
-export class PersonService {
-  private apiUrl = 'https://localhost:7240/kmcm_api/Person'; // URL de tu API
+export class Kmmc_PersonService {
+  private apiUrl = 'https://localhost:7240/kmcm_api/Person';
 
   constructor(private http: HttpClient) { }
 

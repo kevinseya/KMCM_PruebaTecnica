@@ -4,14 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e81a3c49-a58e-4998-94ed-f1be6b85c11f" name="Changes" comment="First Commit Frontend">
-      <change beforePath="$PROJECT_DIR$/kmcm_frontend/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/kmcm_frontend/angular.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kmcm_frontend/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/kmcm_frontend/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kmcm_frontend/src/app/app.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/kmcm_frontend/src/app/kmcm_models/kmcm_person.model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kmcm_frontend/src/app/app.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/kmcm_frontend/src/app/app.component.spec.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/kmcm_frontend/src/app/app.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/kmcm_frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/kmcm_frontend/src/app/app.module.ts" afterDir="false" />
+    <list default="true" id="e81a3c49-a58e-4998-94ed-f1be6b85c11f" name="Changes" comment="Add Component Person and Services Auth and Person">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kmcm_frontend/src/app/kmcm_components/kmcm_person/person.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/kmcm_frontend/src/app/kmcm_components/kmcm_person/person.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kmcm_frontend/src/app/kmcm_components/kmcm_person/person.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/kmcm_frontend/src/app/kmcm_components/kmcm_person/person.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +31,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/Mateo/Documents/NET/KMCM_PreubaTecnica_Frontend",
+    "last_opened_file_path": "C:/Users/Mateo/Documents/NET/KMCM_PreubaTecnica_Frontend/kmcm_frontend",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -76,7 +72,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1728014902363</updated>
-      <workItem from="1728014903343" duration="8467000" />
+      <workItem from="1728014903343" duration="9667000" />
+      <workItem from="1728026382387" duration="100000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit Frontend">
       <option name="closed" value="true" />
@@ -102,7 +99,23 @@
       <option name="project" value="LOCAL" />
       <updated>1728016106214</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Add Component Person and Services Auth and Person">
+      <option name="closed" value="true" />
+      <created>1728023757893</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1728023757893</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Add Component Person and Services Auth and Person">
+      <option name="closed" value="true" />
+      <created>1728023793038</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1728023793038</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -133,6 +146,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="First Commit Frontend" />
-    <option name="LAST_COMMIT_MESSAGE" value="First Commit Frontend" />
+    <MESSAGE value="Add Component Person and Services Auth and Person" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Component Person and Services Auth and Person" />
   </component>
 </project>

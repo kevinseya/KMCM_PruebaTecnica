@@ -1,0 +1,34 @@
+<app-navbar></app-navbar>
+
+<h2 class="table-title">Lista de Credenciales</h2>
+<div class="button-container" style="text-align: center;">
+  <button class="btn-submit">Crear Nuevo Usuario</button>
+</div>
+<table class="user-table">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Usuario</th>
+    <th>Password</th>
+    <th>Dueño</th>
+    <th>Acciones</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let user of users">
+    <td>{{ user.kmcm_id }}</td>
+    <td>{{ user.kmcm_username }}</td>
+    <td>{{ user.kmcm_password }}</td>
+    <td>{{ user.fullName || 'Cargando...' }}</td>
+    <td>
+      <button class="btn-edit" >Editar</button>
+      <button class="btn-delete" (click)="deleteUser(user.kmcm_id)"  [disabled]="user.kmcm_id === null">Eliminar</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<div *ngIf="users.length === 0">
+  <p>No hay personas disponibles.</p>
+</div>
+

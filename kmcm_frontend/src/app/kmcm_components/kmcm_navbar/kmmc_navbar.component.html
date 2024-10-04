@@ -2,9 +2,15 @@
   <div class="navbar-container">
     <div class="nav-menu">
       <span class="user-name">Hola, {{ userName }}</span>
+      <a routerLink="/menu" class="nav-link">Menú</a>
+      <a routerLink="/users" class="nav-link">Gestión de Usuarios</a>
+      <a routerLink="/persons" class="nav-link">Gestión de Personas</a>
     </div>
     <div class="nav-actions">
       <button class="btn-logout" (click)="logout()">Cerrar Sesión</button>
     </div>
   </div>
 </nav>
+
+
+
