@@ -1,4 +1,6 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
 <app-navbar></app-navbar>
 <div *ngIf="persons.length > 0">
   <h2 class="table-title">Lista de Personas</h2>
@@ -28,7 +30,7 @@
       <td>
         <button class="btn-edit" (click)="openEditModal(person)">Editar</button>
         <button class="btn-delete" (click)="deletePerson(person.kmcm_id)"  [disabled]="person.kmcm_id === null">Eliminar</button>
-        <button class="btn-submit" (click)="getUserByIdPerson(person)" >Credenciales</button>
+        <button class="btn-submit" (click)="getUserByIdPerson(person)" >Ver Credenciales</button>
       </td>
     </tr>
     </tbody>
@@ -40,66 +42,63 @@
 </div>
 
 <!-- Modal para editar o crear persona -->
-<div id="modalEditPerson" class="modal" *ngIf="selectedPerson && editMode">
+<div id="modalEditPerson" class="modal" *ngIf="selectedPerson && modalCreation">
   <div class="modal-content">
     <span class="close" (click)="closeEditModal()">&times;</span>
     <h2>{{ selectedPerson.kmcm_id ? 'Editar Persona' : 'Crear Nueva Persona' }}</h2>
-    <form (ngSubmit)="savePerson()" #personForm="ngForm">
+    <form [formGroup]="personForm" (ngSubmit)="savePerson()">
       <div class="form-group">
         <label for="name">Nombre:</label>
-        <input id="name" [(ngModel)]="selectedPerson.kmcm_name" name="name" required />
-        <div *ngIf="personForm.submitted && !selectedPerson.kmcm_name" class="error">
-          {{ 'El nombre es obligatorio.' }}
-        </div>
-        <div *ngIf="selectedPerson.kmcm_name && selectedPerson.kmcm_name.length > 100" class="error">
-          {{ 'El nombre no puede exceder los 100 caracteres.' }}
+        <input id="name" formControlName="kmcm_name" required />
+        <div *ngIf="personForm.get('kmcm_name')?.invalid && personForm.get('kmcm_name')?.touched" class="error">
+          <div *ngIf="personForm.get('kmcm_name')?.errors?.['required']">El nombre es obligatorio.</div>
+          <div *ngIf="personForm.get('kmcm_name')?.errors?.['maxlength']">El nombre no puede exceder los 15 caracteres.</div>
         </div>
       </div>
+
       <div class="form-group">
         <label for="lastname">Apellido:</label>
-        <input id="lastname" [(ngModel)]="selectedPerson.kmcm_lastname" name="lastname" required />
-        <div *ngIf="personForm.submitted && !selectedPerson.kmcm_lastname" class="error">
-          {{ 'El apellido es obligatorio.' }}
-        </div>
-        <div *ngIf="selectedPerson.kmcm_lastname && selectedPerson.kmcm_lastname.length > 100" class="error">
-          {{ 'El apellido no puede exceder los 100 caracteres.' }}
+        <input id="lastname" formControlName="kmcm_lastname" required />
+        <div *ngIf="personForm.get('kmcm_lastname')?.invalid && personForm.get('kmcm_lastname')?.touched" class="error">
+          <div *ngIf="personForm.get('kmcm_lastname')?.errors?.['required']">El apellido es obligatorio.</div>
+          <div *ngIf="personForm.get('kmcm_lastname')?.errors?.['maxlength']">El apellido no puede exceder los 15caracteres.</div>
         </div>
       </div>
+
       <div class="form-group">
         <label for="address">Dirección:</label>
-        <input id="address" [(ngModel)]="selectedPerson.kmcm_address" name="address" />
-        <div *ngIf="selectedPerson.kmcm_address && selectedPerson.kmcm_address.length > 200" class="error">
-          {{ 'La dirección no puede exceder los 200 caracteres.' }}
+        <input id="address" formControlName="kmcm_address" />
+        <div *ngIf="personForm.get('kmcm_address')?.invalid && personForm.get('kmcm_address')?.touched" class="error">
+          <div *ngIf="personForm.get('kmcm_address')?.errors?.['maxlength']">La dirección no puede exceder los 100 caracteres.</div>
         </div>
       </div>
+
       <div class="form-group">
         <label for="phone">Teléfono:</label>
-        <input id="phone" [(ngModel)]="selectedPerson.kmcm_phone" name="phone" required />
-        <div *ngIf="personForm.submitted && !selectedPerson.kmcm_phone" class="error">
-          {{ 'El número de teléfono es obligatorio.' }}
-        </div>
-        <div *ngIf="selectedPerson.kmcm_phone && selectedPerson.kmcm_phone.length > 15" class="error">
-          {{ 'El teléfono no puede exceder los 15 caracteres.' }}
-        </div>
-        <div *ngIf="selectedPerson.kmcm_phone && !isPhoneValid(selectedPerson.kmcm_phone)" class="error">
-          {{ 'El número de teléfono no es válido.' }}
+        <input id="phone" formControlName="kmcm_phone" required />
+        <div *ngIf="personForm.get('kmcm_phone')?.invalid && personForm.get('kmcm_phone')?.touched" class="error">
+          <div *ngIf="personForm.get('kmcm_phone')?.errors?.['required']">El número de teléfono es obligatorio.</div>
+          <div *ngIf="personForm.get('kmcm_phone')?.errors?.['maxlength']">El teléfono no puede exceder los 10 caracteres.</div>
+          <div *ngIf="personForm.get('kmcm_phone')?.errors?.['pattern']">El número de teléfono no es válido.</div>
         </div>
       </div>
+
       <div class="form-group">
         <label for="birthdate">Fecha de Nacimiento:</label>
-        <input id="birthdate" [(ngModel)]="selectedPerson.kmcm_birthdate" name="birthdate" type="date" required />
-        <div *ngIf="personForm.submitted && !selectedPerson.kmcm_birthdate" class="error">
-          {{ 'La fecha de nacimiento es obligatoria.' }}
+        <input id="birthdate" formControlName="kmcm_birthdate" type="date" required />
+        <div *ngIf="personForm.get('kmcm_birthdate')?.invalid && personForm.get('kmcm_birthdate')?.touched" class="error">
+          <div *ngIf="personForm.get('kmcm_birthdate')?.errors?.['required']">La fecha de nacimiento es obligatoria.</div>
         </div>
       </div>
-      <button class="btn-submit" type="submit">Guardar Cambios</button>
+
+      <button class="btn-submit" type="submit" [disabled]="personForm.invalid">Guardar Cambios</button>
     </form>
   </div>
 </div>
 
 
 <!-- Modal Credenciales-->
-<div id= "modalCredentials" class="modal" *ngIf="selectedUser && !editMode && userFlag">
+<div id= "modalCredentials" class="modal" *ngIf="selectedPerson && selectedUser && modalUser">
   <div class="modal-content">
     <span class="close" (click)="closeUserModal()">&times;</span>
       <h2>Credenciales de Usuario</h2>
@@ -107,22 +106,21 @@
       <label for="username">Nombre de Usuario:</label>
       <input id="username" [(ngModel)]="selectedUser.kmcm_username" name="username" [readOnly]="editable" />
     </div>
-      <div class="form-group">
-        <label for="password">Contraseña:</label>
+
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <div class="input-group">
         <input
+          [type]="passwordVisible ? 'text' : 'password'"
           id="password"
           [(ngModel)]="selectedUser.kmcm_password"
-          name="password"
-
           [readOnly]="editable"
-          required
-          minlength="8"
-          #passwordField="ngModel" />
 
-        <div *ngIf="passwordField.invalid && (passwordField.dirty || passwordField.touched)" class="error">
-          <div *ngIf="passwordField.errors?.['required']">La contraseña es obligatoria.</div>
-          <div *ngIf="passwordField.errors?.['minlength']">La contraseña debe tener al menos 8 caracteres.</div>
-        </div>
+        />
+        <button type="button" (click)="togglePasswordVisibility()" class="btn-toggle">
+          <i [ngClass]="passwordVisible ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+        </button>
       </div>
+    </div>
   </div>
 </div>

@@ -151,3 +151,23 @@ input:focus {
 .btn-submit:hover {
   background-color: #45a049; /* Color verde más oscuro al pasar el ratón */
 }
+
+
+
+.input-group {
+  position: relative;
+}
+
+.btn-toggle {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.btn-toggle i {
+  font-size: 1.2em; /* Ajusta el tamaño del icono si es necesario */
+}

@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { Kmcm_user } from '../../kmcm_models/kmcm_models';
+import { environment } from '../../../environment/enviroment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class Kmmc_UserService {
-  private apiUrl = 'https://localhost:7240/kmcm_api/User';
+  private apiUrl = `${environment.apiUrl}/User`;
   constructor(private http: HttpClient) { }
 
   // Método para obtener todas las personas
@@ -30,7 +32,7 @@ export class Kmmc_UserService {
   // Método para actualizar un usuario existente
   updateUser(id: number, person: Kmcm_user): Observable<void> {
     const headers = this.createAuthorizationHeader();
-    return this.http.put<void>(`${this.apiUrl}/${id}`, person, { headers });
+    return this.http.patch<void>(`${this.apiUrl}/${id}`, person, { headers });
   }
 
   // Método para eliminar un usuario por su ID

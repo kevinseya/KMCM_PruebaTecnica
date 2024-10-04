@@ -1,8 +1,9 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 <app-navbar></app-navbar>
 
 <h2 class="table-title">Lista de Credenciales</h2>
 <div class="button-container" style="text-align: center;">
-  <button class="btn-submit">Crear Nuevo Usuario</button>
+  <button class="btn-submit" (click)="openCreateModal()">Crear Nuevo Usuario</button>
 </div>
 <table class="user-table">
   <thead>
@@ -21,7 +22,7 @@
     <td>{{ user.kmcm_password }}</td>
     <td>{{ user.fullName || 'Cargando...' }}</td>
     <td>
-      <button class="btn-edit" >Editar</button>
+      <button class="btn-edit" (click)="openEditModal(user)">Editar</button>
       <button class="btn-delete" (click)="deleteUser(user.kmcm_id)"  [disabled]="user.kmcm_id === null">Eliminar</button>
     </td>
   </tr>
@@ -30,5 +31,57 @@
 
 <div *ngIf="users.length === 0">
   <p>No hay personas disponibles.</p>
+</div>
+
+
+
+<!-- Modal para editar o crear persona -->
+<div id="modalEditUser" class="modal" *ngIf="openModal">
+  <div class="modal-content">
+    <span class="close" (click)="closeEditModal()">&times;</span>
+    <h2>{{ selectedUser ? 'Editar Persona' : 'Crear Nueva Persona' }}</h2>
+    <form [formGroup]="userForm" (ngSubmit)="saveUser()">
+
+      <div class="form-group" *ngIf="!selectedUser">
+        <label for="kmcm_person_id" class="form-label">Select Person:</label>
+        <select id="kmcm_person_id" formControlName="kmcm_person_id" class="form-select">
+          <option value="" disabled selected>-- Select Person --</option>
+          <option *ngFor="let person of PersonList" [value]="person.kmcm_id">
+            {{ person.kmcm_name + " " + person.kmcm_lastname }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="username">Usuario:</label>
+        <input id="username" formControlName="kmcm_username" required [readOnly]="editable"/>
+        <div *ngIf="userForm.get('kmcm_username')?.invalid && userForm.get('kmcm_username')?.touched" class="error">
+          <div *ngIf="userForm.get('kmcm_username')?.errors?.['required']">El username es obligatorio.</div>
+          <div *ngIf="userForm.get('kmcm_username')?.errors?.['maxlength']">El username no puede exceder los 10 caracteres.</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <div class="input-group">
+          <input
+            [type]="passwordVisible ? 'text' : 'password'"
+            id="password"
+            formControlName="kmcm_password"
+            required
+          />
+          <button type="button" (click)="togglePasswordVisibility()" class="btn-toggle">
+            <i [ngClass]="passwordVisible ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+          </button>
+        </div>
+        <div *ngIf="userForm.get('kmcm_password')?.invalid && userForm.get('kmcm_password')?.touched" class="error">
+          <div *ngIf="userForm.get('kmcm_password')?.errors?.['required']">El password es obligatorio.</div>
+          <div *ngIf="userForm.get('kmcm_password')?.errors?.['pattern']">La contraseña debe tener al menos 8 caracteres, una mayúscula, un número y un símbolo.</div>
+        </div>
+      </div>
+
+      <button class="btn-submit" type="submit" [disabled]="userForm.invalid">Guardar Cambios</button>
+    </form>
+  </div>
 </div>
 

@@ -151,3 +151,47 @@ input:focus {
 .btn-submit:hover {
   background-color: #45a049; /* Color verde más oscuro al pasar el ratón */
 }
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.form-select {
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  padding: 0.375rem 0.75rem;
+  background-color: #ffffff;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-select:focus {
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+.form-select option {
+  padding: 10px;
+}
+
+.input-group {
+  position: relative;
+}
+
+.btn-toggle {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.btn-toggle i {
+  font-size: 1.2em; /* Ajusta el tamaño del icono si es necesario */
+}

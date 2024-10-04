@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { Kmcm_person } from '../../kmcm_models/kmcm_models';
+import { environment } from '../../../environment/enviroment';
 @Injectable({
   providedIn: 'root'
 })
 export class Kmmc_PersonService {
-  private apiUrl = 'https://localhost:7240/kmcm_api/Person';
+  private apiUrl = `${environment.apiUrl}/Person`;
 
   constructor(private http: HttpClient) { }
 
@@ -38,6 +39,12 @@ export class Kmmc_PersonService {
   deletePerson(id: number): Observable<void> {
     const headers = this.createAuthorizationHeader();
     return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers });
+  }
+
+  // Método para obtener personas sin usuario relacionado
+  getPersonsWithoutUser(): Observable<Kmcm_person[]> {
+    const headers = this.createAuthorizationHeader();
+    return this.http.get<Kmcm_person[]>(`${this.apiUrl}/personsWithoutUsers`, { headers });
   }
 
   // Método para crear el encabezado de autorización
