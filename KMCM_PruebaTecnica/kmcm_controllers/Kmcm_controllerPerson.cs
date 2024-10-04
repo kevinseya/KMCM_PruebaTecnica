@@ -1,5 +1,6 @@
 ﻿using KMCM_PruebaTecnica.kmcm_accessData;
 using KMCM_PruebaTecnica.kmcm_models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KMCM_PruebaTecnica.Controllers
@@ -20,6 +21,7 @@ namespace KMCM_PruebaTecnica.Controllers
 		/// </summary>
 		/// <returns>Una lista de personas.</returns>
 		[HttpGet]
+		[Authorize]
 		public async Task<ActionResult<IEnumerable<Kmcm_person>>> GetAllPersons()
 		{
 			var persons = await _repository.getAllPersonsAsync();
@@ -32,12 +34,13 @@ namespace KMCM_PruebaTecnica.Controllers
 		/// <param name="id">El ID de la persona.</param>
 		/// <returns>La persona correspondiente al ID proporcionado.</returns>
 		[HttpGet("{id}")]
+		[Authorize]
 		public async Task<ActionResult<Kmcm_person>> GetPersonById(int id)
 		{
 			var person = await _repository.getPersonByIdAsync(id);
 			if (person == null)
 			{
-				return NotFound();
+				return NotFound($"No se encontró una persona con ID {id}.");
 			}
 			return Ok(person);
 		}
@@ -48,8 +51,14 @@ namespace KMCM_PruebaTecnica.Controllers
 		/// <param name="person">El objeto persona a agregar.</param>
 		/// <returns>La persona agregada.</returns>
 		[HttpPost]
+		[Authorize]
 		public async Task<ActionResult<Kmcm_person>> AddPerson(Kmcm_person person)
 		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
 			var addedPerson = await _repository.addPersonAsync(person);
 			if (addedPerson == null)
 			{
@@ -65,6 +74,7 @@ namespace KMCM_PruebaTecnica.Controllers
 		/// <param name="person">Los datos actualizados de la persona.</param>
 		/// <returns>Un valor booleano que indica si la actualización fue exitosa.</returns>
 		[HttpPut("{id}")]
+		[Authorize]
 		public async Task<IActionResult> UpdatePerson(int id, Kmcm_person person)
 		{
 			if (id != person.kmcm_id)
@@ -86,6 +96,7 @@ namespace KMCM_PruebaTecnica.Controllers
 		/// <param name="id">El ID de la persona a eliminar.</param>
 		/// <returns>Un valor booleano que indica si la eliminación fue exitosa.</returns>
 		[HttpDelete("{id}")]
+		[Authorize]
 		public async Task<IActionResult> DeletePerson(int id)
 		{
 			var success = await _repository.deletePersonAsync(id);
@@ -93,7 +104,7 @@ namespace KMCM_PruebaTecnica.Controllers
 			{
 				return NotFound($"No se encontró una persona con ID {id} para eliminar.");
 			}
-			return NoContent(); 
+			return NoContent();
 		}
 	}
 }
