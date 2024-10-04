@@ -1,0 +1,54 @@
+.login-form {
+  max-width: 400px; /* Ancho máximo del formulario */
+  margin: 50px auto; /* Centrar el formulario vertical y horizontalmente */
+  padding: 20px; /* Espaciado interior */
+  border: 1px solid #ccc; /* Borde del formulario */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidad */
+  background-color: #f9f9f9; /* Color de fondo */
+}
+
+h2 {
+  text-align: center; /* Centrar el título */
+  color: #333; /* Color del título */
+}
+
+.form-group {
+  margin-bottom: 15px; /* Espaciado entre campos */
+}
+
+label {
+  display: block; /* Mostrar el label como bloque */
+  margin-bottom: 5px; /* Espaciado debajo del label */
+  font-weight: bold; /* Negrita para los labels */
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%; /* Ancho completo */
+  padding: 10px; /* Espaciado interno */
+  border: 1px solid #ccc; /* Borde de los campos */
+  border-radius: 5px; /* Bordes redondeados */
+  box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  border-color: #007bff; /* Color del borde al enfocar */
+  outline: none; /* Quitar el contorno por defecto */
+}
+
+.btn {
+  width: 100%; /* Botón de ancho completo */
+  padding: 10px; /* Espaciado interno del botón */
+  background-color: #007bff; /* Color de fondo del botón */
+  color: white; /* Color del texto del botón */
+  border: none; /* Sin borde */
+  border-radius: 5px; /* Bordes redondeados */
+  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+  font-size: 16px; /* Tamaño de la fuente */
+}
+
+.btn:hover {
+  background-color: #0056b3; /* Color del botón al pasar el mouse */
+}
