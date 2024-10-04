@@ -19,45 +19,45 @@ namespace KMCM_PruebaTecnica.kmcm_models.kmcm_DbContext
 			{
 				entity.HasKey(e => e.kmcm_id).HasName("PK__Persons__ID_PERSON");
 
-				entity.ToTable("Persons");
+				entity.ToTable("KMCM_Persons");
 
-				entity.Property(e => e.kmcm_id).HasColumnName("ID_PERSON");
+				entity.Property(e => e.kmcm_id).HasColumnName("KMCM_ID_PERSON");
 				entity.Property(e => e.kmcm_name)
 					.HasMaxLength(100)
 					.IsUnicode(false)
-					.HasColumnName("NAME");
+					.HasColumnName("KMCM_NAME");
 				entity.Property(e => e.kmcm_lastname)
 					.HasMaxLength(100)
 					.IsUnicode(false)
-					.HasColumnName("LASTNAME");
+					.HasColumnName("KMCM_LASTNAME");
 				entity.Property(e => e.kmcm_address)
 					.HasMaxLength(200)
 					.IsUnicode(false)
-					.HasColumnName("ADDRESS");
+					.HasColumnName("KMCM_ADDRESS");
 				entity.Property(e => e.kmcm_phone)
 					.HasMaxLength(15)
 					.IsUnicode(false)
-					.HasColumnName("PHONE");
+					.HasColumnName("KMCM_PHONE");
 				entity.Property(e => e.kmcm_birthdate)
 					.HasColumnType("date")
-					.HasColumnName("BIRTHDATE");
+					.HasColumnName("KMCM_BIRTHDATE");
 			});
 
 			modelBuilder.Entity<kmcm_user>(entity =>
 			{
 				entity.HasKey(e => e.kmcm_id).HasName("PK__Users__ID_USER"); 
 
-				entity.ToTable("Users"); 
+				entity.ToTable("KMCM_Users"); 
 
-				entity.Property(e => e.kmcm_id).HasColumnName("ID_USER");
+				entity.Property(e => e.kmcm_id).HasColumnName("KMCM_ID_USER");
 				entity.Property(e => e.kmcm_username)
 					.HasMaxLength(50)
 					.IsUnicode(false)
-					.HasColumnName("USERNAME");
+					.HasColumnName("KMCM_USERNAME");
 				entity.Property(e => e.kmcm_password)
 					.HasMaxLength(100)
 					.IsUnicode(false)
-					.HasColumnName("PASSWORD");
+					.HasColumnName("KMCM_PASSWORD");
 
 				// Configuración de la clave foránea
 				entity.HasOne(d => d.Kmcm_person)

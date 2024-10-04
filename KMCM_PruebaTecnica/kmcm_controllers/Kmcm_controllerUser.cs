@@ -36,9 +36,10 @@ namespace KMCM_PruebaTecnica.Controllers
 		/// <param name="id">El ID del usuario.</param>
 		/// <returns>El usuario correspondiente.</returns>
 		[HttpGet("{id}")]
+		[Authorize]
 		public async Task<ActionResult<kmcm_user>> GetUserById(int id)
 		{
-			var user = await _repository.getUserByIdAsync(id);
+			var user = await _repository.getUserByPersonIdAsync(id);
 			if (user == null)
 			{
 				return NotFound();
@@ -46,12 +47,15 @@ namespace KMCM_PruebaTecnica.Controllers
 			return Ok(user);
 		}
 
+
+
 		/// <summary>
 		/// Agregar un nuevo usuario.
 		/// </summary>
 		/// <param name="user">El objeto usuario a agregar.</param>
 		/// <returns>El usuario agregado.</returns>
 		[HttpPost]
+		[Authorize]
 		public async Task<ActionResult<kmcm_user>> AddUser(kmcm_user user)
 		{
 			if (!ModelState.IsValid)
@@ -64,12 +68,13 @@ namespace KMCM_PruebaTecnica.Controllers
 		}
 
 		/// <summary>
-		/// Actualizar un usuario existente.
+		/// Actualizar parcialmente un usuario existente.
 		/// </summary>
 		/// <param name="id">El ID del usuario a actualizar.</param>
 		/// <param name="user">Los datos actualizados del usuario.</param>
-		/// <returns>Un valor booleano que indica si la actualización fue exitosa.</returns>
-		[HttpPut("{id}")]
+		/// <returns>Una respuesta indicando el resultado de la operación.</returns>
+		[HttpPatch("{id}")]
+		[Authorize]
 		public async Task<IActionResult> UpdateUser(int id, kmcm_user user)
 		{
 			if (id != user.kmcm_id)
@@ -77,13 +82,31 @@ namespace KMCM_PruebaTecnica.Controllers
 				return BadRequest("El ID del usuario no coincide.");
 			}
 
-			var success = await _repository.updateUserAsync(user);
-			if (!success)
+			var existingUser = await _repository.getUserByIdAsync(id);
+			if (existingUser == null)
 			{
 				return NotFound($"No se encontró un usuario con ID {id} para actualizar.");
 			}
-			return NoContent();
+
+			if (!string.IsNullOrEmpty(user.kmcm_password))
+			{
+				existingUser.kmcm_password = user.kmcm_password;
+			}
+
+			if (!string.IsNullOrEmpty(user.kmcm_username))
+			{
+				existingUser.kmcm_username = user.kmcm_username;
+			}
+
+			var success = await _repository.updateUserAsync(existingUser);
+			if (!success)
+			{
+				return BadRequest("No se pudo actualizar el usuario.");
+			}
+
+			return NoContent(); // O devuelve un resultado exitoso según tu diseño
 		}
+
 
 		/// <summary>
 		/// Eliminar un usuario por su ID.
@@ -91,6 +114,7 @@ namespace KMCM_PruebaTecnica.Controllers
 		/// <param name="id">El ID del usuario a eliminar.</param>
 		/// <returns>Un valor booleano que indica si la eliminación fue exitosa.</returns>
 		[HttpDelete("{id}")]
+		[Authorize]
 		public async Task<IActionResult> DeleteUser(int id)
 		{
 			var success = await _repository.deleteUserAsync(id);

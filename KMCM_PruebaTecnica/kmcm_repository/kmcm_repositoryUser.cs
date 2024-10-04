@@ -19,9 +19,9 @@ namespace KMCM_PruebaTecnica.kmcm_accessData
 		/// Obtener todos los usuarios.
 		/// </summary>
 		/// <returns>Lista de usuarios.</returns>
-		public async Task<IEnumerable<kmcm_user>> getAllUsersAsync()
+		public async Task<List<kmcm_user>> getAllUsersAsync()
 		{
-			return await _context.Users.ToListAsync(); 
+			return await _context.Users.Include(u => u.Kmcm_person).ToListAsync();
 		}
 
 		/// <summary>
@@ -32,6 +32,17 @@ namespace KMCM_PruebaTecnica.kmcm_accessData
 		public async Task<kmcm_user> getUserByIdAsync(int id)
 		{
 			return await _context.Users.FindAsync(id); 
+		}
+
+		/// <summary>
+		/// Obtener un usuario por su ID de persona FK.
+		/// </summary>
+		/// <param name="personId">El ID de la persona del usuario.</param>
+		/// <returns>El usuario correspondiente.</returns>
+		public async Task<kmcm_user> getUserByPersonIdAsync(int personId)
+		{
+			return await _context.Users
+				.FirstOrDefaultAsync(user => user.kmcm_person_id == personId);
 		}
 
 		/// <summary>

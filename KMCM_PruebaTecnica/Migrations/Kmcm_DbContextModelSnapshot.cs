@@ -27,7 +27,7 @@ namespace KMCM_PruebaTecnica.Migrations
                     b.Property<int>("kmcm_id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("ID_PERSON");
+                        .HasColumnName("KMCM_ID_PERSON");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("kmcm_id"));
 
@@ -36,37 +36,37 @@ namespace KMCM_PruebaTecnica.Migrations
                         .HasMaxLength(200)
                         .IsUnicode(false)
                         .HasColumnType("varchar(200)")
-                        .HasColumnName("ADDRESS");
+                        .HasColumnName("KMCM_ADDRESS");
 
                     b.Property<DateTime>("kmcm_birthdate")
                         .HasColumnType("date")
-                        .HasColumnName("BIRTHDATE");
+                        .HasColumnName("KMCM_BIRTHDATE");
 
                     b.Property<string>("kmcm_lastname")
                         .IsRequired()
                         .HasMaxLength(100)
                         .IsUnicode(false)
                         .HasColumnType("varchar(100)")
-                        .HasColumnName("LASTNAME");
+                        .HasColumnName("KMCM_LASTNAME");
 
                     b.Property<string>("kmcm_name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .IsUnicode(false)
                         .HasColumnType("varchar(100)")
-                        .HasColumnName("NAME");
+                        .HasColumnName("KMCM_NAME");
 
                     b.Property<string>("kmcm_phone")
                         .IsRequired()
                         .HasMaxLength(15)
                         .IsUnicode(false)
                         .HasColumnType("varchar(15)")
-                        .HasColumnName("PHONE");
+                        .HasColumnName("KMCM_PHONE");
 
                     b.HasKey("kmcm_id")
                         .HasName("PK__Persons__ID_PERSON");
 
-                    b.ToTable("Persons", (string)null);
+                    b.ToTable("KMCM_Persons", (string)null);
                 });
 
             modelBuilder.Entity("KMCM_PruebaTecnica.kmcm_models.kmcm_user", b =>
@@ -74,7 +74,7 @@ namespace KMCM_PruebaTecnica.Migrations
                     b.Property<int>("kmcm_id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("ID_USER");
+                        .HasColumnName("KMCM_ID_USER");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("kmcm_id"));
 
@@ -83,7 +83,7 @@ namespace KMCM_PruebaTecnica.Migrations
                         .HasMaxLength(100)
                         .IsUnicode(false)
                         .HasColumnType("varchar(100)")
-                        .HasColumnName("PASSWORD");
+                        .HasColumnName("KMCM_PASSWORD");
 
                     b.Property<int>("kmcm_person_id")
                         .HasColumnType("int");
@@ -93,14 +93,14 @@ namespace KMCM_PruebaTecnica.Migrations
                         .HasMaxLength(50)
                         .IsUnicode(false)
                         .HasColumnType("varchar(50)")
-                        .HasColumnName("USERNAME");
+                        .HasColumnName("KMCM_USERNAME");
 
                     b.HasKey("kmcm_id")
                         .HasName("PK__Users__ID_USER");
 
                     b.HasIndex("kmcm_person_id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("KMCM_Users", (string)null);
                 });
 
             modelBuilder.Entity("KMCM_PruebaTecnica.kmcm_models.kmcm_user", b =>

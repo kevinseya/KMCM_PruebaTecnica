@@ -22,6 +22,6 @@ namespace KMCM_PruebaTecnica.kmcm_models
 		// Clave foránea que se relaciona con el modelo Kmcm_person
 		[ForeignKey("Kmcm_person")]
 		public int kmcm_person_id { get; set; }
-		public virtual Kmcm_person Kmcm_person { get; set; }
+		public virtual Kmcm_person? Kmcm_person { get; set; }
 	}
 }

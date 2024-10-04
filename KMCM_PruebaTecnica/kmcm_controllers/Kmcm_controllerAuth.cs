@@ -1,4 +1,4 @@
-﻿using KMCM_PruebaTecnica.kmcm_accessData; // Asegúrate de que la ruta es correcta
+﻿using KMCM_PruebaTecnica.kmcm_accessData; 
 using KMCM_PruebaTecnica.kmcm_models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -40,8 +40,8 @@ namespace KMCM_PruebaTecnica.Controllers
 				return BadRequest(ModelState);
 			}
 
-			
-			var user = await _userRepository.getAllUsersAsync(); 
+
+			var user = await _userRepository.getAllUsersAsync();
 			var existingUser = user.FirstOrDefault(u => u.kmcm_username == loginModel.Username);
 
 			if (existingUser == null || existingUser.kmcm_password != loginModel.Password) 
@@ -70,7 +70,13 @@ namespace KMCM_PruebaTecnica.Controllers
 			};
 
 			var token = tokenHandler.CreateToken(tokenDescriptor);
-			return Ok(new { Token = tokenHandler.WriteToken(token) });
+			var name = existingUser.Kmcm_person?.kmcm_name;
+			var lastname = existingUser.Kmcm_person?.kmcm_lastname;
+
+			return Ok(new { Token = tokenHandler.WriteToken(token),
+				Name = name,
+				Lastname = lastname
+			});
 		}
 	}
 
