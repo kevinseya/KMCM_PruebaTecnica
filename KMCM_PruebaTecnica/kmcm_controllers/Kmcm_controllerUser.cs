@@ -1,5 +1,6 @@
 ﻿using KMCM_PruebaTecnica.kmcm_accessData;
 using KMCM_PruebaTecnica.kmcm_models;
+using KMCM_PruebaTecnica.kmcm_util;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -12,10 +13,12 @@ namespace KMCM_PruebaTecnica.Controllers
 	public class UserController : ControllerBase
 	{
 		private readonly kmcm_repositoryUser _repository;
+		private readonly kmcm_encript _encript;
 
-		public UserController(kmcm_repositoryUser repository)
+		public UserController(kmcm_repositoryUser repository, kmcm_encript encript)
 		{
 			_repository = repository;
+			_encript = encript;
 		}
 
 		/// <summary>
@@ -47,8 +50,6 @@ namespace KMCM_PruebaTecnica.Controllers
 			return Ok(user);
 		}
 
-
-
 		/// <summary>
 		/// Agregar un nuevo usuario.
 		/// </summary>
@@ -62,6 +63,7 @@ namespace KMCM_PruebaTecnica.Controllers
 			{
 				return BadRequest(ModelState);
 			}
+			user.kmcm_password = _encript.Encrypt(user.kmcm_password);
 
 			var addedUser = await _repository.addUserAsync(user);
 			return CreatedAtAction(nameof(GetUserById), new { id = addedUser.kmcm_id }, addedUser);
@@ -90,7 +92,7 @@ namespace KMCM_PruebaTecnica.Controllers
 
 			if (!string.IsNullOrEmpty(user.kmcm_password))
 			{
-				existingUser.kmcm_password = user.kmcm_password;
+				existingUser.kmcm_password = _encript.Encrypt(user.kmcm_password);
 			}
 
 			if (!string.IsNullOrEmpty(user.kmcm_username))
@@ -106,7 +108,6 @@ namespace KMCM_PruebaTecnica.Controllers
 
 			return NoContent(); // O devuelve un resultado exitoso según tu diseño
 		}
-
 
 		/// <summary>
 		/// Eliminar un usuario por su ID.

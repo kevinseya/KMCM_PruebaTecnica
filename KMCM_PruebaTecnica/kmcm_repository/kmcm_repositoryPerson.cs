@@ -1,5 +1,7 @@
 ﻿using KMCM_PruebaTecnica.kmcm_models;
 using KMCM_PruebaTecnica.kmcm_models.kmcm_DbContext;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using System;
@@ -133,5 +135,26 @@ namespace KMCM_PruebaTecnica.kmcm_accessData
 				return false; 
 			}
 		}
+
+		/// <summary>
+		/// Obtiene todas las personas que no tienen un usuario relacionado.
+		/// </summary>
+		/// <returns>Una lista de objetos <see cref="Kmcm_person"/>.</returns>
+		public async Task<IEnumerable<Kmcm_person>> getPersonsWithoutUserAsync()
+		{
+			try
+			{
+				return await _context.Persons
+					.Where(p => !_context.Users.Any(u => u.kmcm_person_id == p.kmcm_id))
+					.ToListAsync();
+			}
+			catch (Exception ex)
+			{
+				_logger.Error($"Error al obtener personas sin usuario: {ex.Message}");
+				return Enumerable.Empty<Kmcm_person>();
+			}
+		}
+
+	
 	}
 }

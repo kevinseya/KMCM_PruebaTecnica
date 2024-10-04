@@ -7,6 +7,7 @@ using System.Text;
 
 using KMCM_PruebaTecnica.kmcm_models.kmcm_DbContext;
 using KMCM_PruebaTecnica.kmcm_accessData;
+using KMCM_PruebaTecnica.kmcm_util;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -67,7 +68,7 @@ builder.Services.AddDbContext<Kmcm_DbContext>(options =>
 // Agregar el repositorio a los servicios
 builder.Services.AddScoped<kmcm_repositoryPerson>();
 builder.Services.AddScoped<kmcm_repositoryUser>();
-
+builder.Services.AddSingleton<kmcm_encript>();
 
 
 // Asegurarse de que el directorio de logs existe

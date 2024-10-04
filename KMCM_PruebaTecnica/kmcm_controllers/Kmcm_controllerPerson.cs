@@ -106,5 +106,17 @@ namespace KMCM_PruebaTecnica.Controllers
 			}
 			return NoContent();
 		}
+
+		/// <summary>
+		/// Para obtener todas las personas que no tienen un usuario relacionado.
+		/// </summary>
+		/// <returns>Una lista de objetos <see cref="Kmcm_person"/>.</returns>
+		[HttpGet("personsWithoutUsers")]
+		[Authorize]
+		public async Task<ActionResult<IEnumerable<Kmcm_person>>> GetPersonsWithoutUser()
+		{
+			var personsWithoutUser = await _repository.getPersonsWithoutUserAsync();
+			return Ok(personsWithoutUser);
+		}
 	}
 }

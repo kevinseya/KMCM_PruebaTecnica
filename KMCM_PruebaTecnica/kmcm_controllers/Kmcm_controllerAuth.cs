@@ -1,5 +1,6 @@
 ﻿using KMCM_PruebaTecnica.kmcm_accessData; 
 using KMCM_PruebaTecnica.kmcm_models;
+using KMCM_PruebaTecnica.kmcm_util;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -14,13 +15,15 @@ namespace KMCM_PruebaTecnica.Controllers
 	public class Kmcm_controllerAuth : ControllerBase
 	{
 		private readonly kmcm_repositoryUser _userRepository;
+		private readonly kmcm_encript _encript;
 		private readonly string _key; 
 		private readonly string _issuer; 
 		private readonly string _audience;
 
-		public Kmcm_controllerAuth(kmcm_repositoryUser userRepository, IConfiguration configuration)
+		public Kmcm_controllerAuth(kmcm_repositoryUser userRepository, kmcm_encript encript,IConfiguration configuration)
 		{
 			_userRepository = userRepository;
+			_encript = encript;
 			_key = configuration.GetValue<string>("Jwt:Key");
 			_issuer = configuration.GetValue<string>("Jwt:Issuer");
 			_audience = configuration.GetValue<string>("Jwt:Audience");
@@ -34,19 +37,26 @@ namespace KMCM_PruebaTecnica.Controllers
 		[HttpPost("login")]
 		public async Task<IActionResult> Login([FromBody] LoginModel loginModel)
 		{
-			
 			if (!ModelState.IsValid)
 			{
 				return BadRequest(ModelState);
 			}
 
+			var users = await _userRepository.getAllUsersAsync();
+			var existingUser = users.FirstOrDefault(u => u.kmcm_username == loginModel.Username);
 
-			var user = await _userRepository.getAllUsersAsync();
-			var existingUser = user.FirstOrDefault(u => u.kmcm_username == loginModel.Username);
-
-			if (existingUser == null || existingUser.kmcm_password != loginModel.Password) 
+			if (existingUser == null)
 			{
-				return Unauthorized(); 
+				return Unauthorized();
+			}
+
+			// Desencriptar la contraseña almacenada
+			var decryptedPassword = _encript.Decrypt(existingUser.kmcm_password);
+
+			// Comparar las contraseñas
+			if (decryptedPassword != loginModel.Password)
+			{
+				return Unauthorized();
 			}
 
 			// Crear los claims del token
@@ -54,8 +64,7 @@ namespace KMCM_PruebaTecnica.Controllers
 			{
 				new Claim(ClaimTypes.NameIdentifier, existingUser.kmcm_id.ToString()),
 				new Claim(ClaimTypes.Name, existingUser.kmcm_username)
-                
-            };
+			};
 
 			// Crear el token JWT
 			var tokenHandler = new JwtSecurityTokenHandler();
@@ -73,7 +82,9 @@ namespace KMCM_PruebaTecnica.Controllers
 			var name = existingUser.Kmcm_person?.kmcm_name;
 			var lastname = existingUser.Kmcm_person?.kmcm_lastname;
 
-			return Ok(new { Token = tokenHandler.WriteToken(token),
+			return Ok(new
+			{
+				Token = tokenHandler.WriteToken(token),
 				Name = name,
 				Lastname = lastname
 			});
