@@ -147,6 +147,7 @@ export class Kmmc_PersonComponent implements OnInit {
   }
 
   getUserByIdPerson(person: Kmcm_person): void {
+    this.modalCreation = false;
     if (!person.kmcm_id) { // Verifica si el ID de la persona es válido
       alert('No se puede encontrar el usuario sin un ID válido de persona.'); // Mensaje de error
       return;

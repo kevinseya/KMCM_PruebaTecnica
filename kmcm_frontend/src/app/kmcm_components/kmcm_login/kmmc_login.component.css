@@ -1,54 +1,91 @@
-.login-form {
-  max-width: 400px; /* Ancho máximo del formulario */
-  margin: 50px auto; /* Centrar el formulario vertical y horizontalmente */
-  padding: 20px; /* Espaciado interior */
-  border: 1px solid #ccc; /* Borde del formulario */
-  border-radius: 10px; /* Bordes redondeados */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidad */
-  background-color: #f9f9f9; /* Color de fondo */
+.login-container {
+  display: flex;
+  height: 100vh;
 }
 
-h2 {
-  text-align: center; /* Centrar el título */
-  color: #333; /* Color del título */
+.login-left, .login-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
 }
 
-.form-group {
-  margin-bottom: 15px; /* Espaciado entre campos */
+.login-left {
+  flex-direction: column;
+  background-color: #f5f5f5;
 }
 
-label {
-  display: block; /* Mostrar el label como bloque */
-  margin-bottom: 5px; /* Espaciado debajo del label */
-  font-weight: bold; /* Negrita para los labels */
+.login-left h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
 }
 
-input[type="text"],
-input[type="password"] {
-  width: 100%; /* Ancho completo */
-  padding: 10px; /* Espaciado interno */
-  border: 1px solid #ccc; /* Borde de los campos */
-  border-radius: 5px; /* Bordes redondeados */
-  box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+.login-left p {
+  margin-bottom: 1rem;
 }
 
-input[type="text"]:focus,
-input[type="password"]:focus {
-  border-color: #007bff; /* Color del borde al enfocar */
-  outline: none; /* Quitar el contorno por defecto */
+.login-left form {
+  width: 100%;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
 }
 
-.btn {
-  width: 100%; /* Botón de ancho completo */
-  padding: 10px; /* Espaciado interno del botón */
-  background-color: #007bff; /* Color de fondo del botón */
-  color: white; /* Color del texto del botón */
-  border: none; /* Sin borde */
-  border-radius: 5px; /* Bordes redondeados */
-  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-  font-size: 16px; /* Tamaño de la fuente */
+.login-left form label {
+  margin-top: 1rem;
 }
 
-.btn:hover {
-  background-color: #0056b3; /* Color del botón al pasar el mouse */
+.login-left form input {
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.login-left .btn {
+  padding: 0.75rem;
+  margin-top: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.login-left .btn-google {
+  background-color: #db4437;
+  color: white;
+}
+
+.login-left .btn-apple {
+  background-color: #000000;
+  color: white;
+}
+
+.login-left .btn-signin {
+  background-color: #4a90e2;
+  color: white;
+}
+
+.login-right {
+  background-color: white;
+}
+
+.login-info {
+  text-align: center;
+}
+
+.login-info h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.login-info p {
+  margin-bottom: 1rem;
+}
+
+.login-info img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
